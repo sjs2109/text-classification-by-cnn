@@ -18,19 +18,19 @@ FLAGS = gflags.FLAGS
 
 # data loading parameters
 gflags.DEFINE_float('dev_sample_percentage', 0.1, 'Percentage of the training data to user for validation (dev set).')
-gflags.DEFINE_string('positive_data_file', './inputs/rt.pos', 'Data source for positive data.')
-gflags.DEFINE_string('negative_data_file', './inputs/rt.neg', 'Data source for negative data.')
+gflags.DEFINE_string('data_file', './inputs/Womens Clothing E-Commerce Reviews_filtered.csv', 'Data source')
+
 
 # model hyperparameters
-gflags.DEFINE_integer('embedding_dim', 128, 'Dimensionality of word embedding (default: 128).')
+gflags.DEFINE_integer('embedding_dim', 512, 'Dimensionality of word embedding (default: 128).')
 gflags.DEFINE_string('filter_sizes', '3,4,5', "Comma-seperated filter sizes (default: '3,4,5').")
-gflags.DEFINE_integer('num_filters', 128, 'Number of filters per filter size (default: 128).')
+gflags.DEFINE_integer('num_filters', 512, 'Number of filters per filter size (default: 128).')
 gflags.DEFINE_float('dropout_keep_prob', 0.5, 'Dropout keep probability (default: 0.5).')
 gflags.DEFINE_float('l2_reg_lambda', 0.0, 'L2 regularization lambda (default: 0.0).')
 
 # training parameters
 gflags.DEFINE_integer('batch_size', 64, 'Batch size (default: 64).')
-gflags.DEFINE_integer('num_epochs', 200, 'Number of training epochs (default: 200).')
+gflags.DEFINE_integer('num_epochs', 100, 'Number of training epochs (default: 200).')
 gflags.DEFINE_integer('evaluate_every', 100, 'Evaluate model on dev set after this many of steps (default: 100).')
 gflags.DEFINE_integer('checkpoint_every', 100, 'Save model after this many steps (default: 100).')
 gflags.DEFINE_integer('num_checkpoints', 5, 'Number of checkpoints to store (default: 5).')
@@ -46,13 +46,13 @@ print('================================')
 for attr, value in FLAGS.flag_values_dict().items():
     print('{0}: {1}'.format(attr.upper(), value))
 print('================================\n\n')
-input('press any key to start...\n\n')
+
 
 ### data preparation ###
 # ===============================================
 
 # load data
-x_text, y = data_helpers.load_text_and_label(file_pos_file=FLAGS.positive_data_file, file_neg_file=FLAGS.negative_data_file)
+x_text, y = data_helpers.load_text_and_label(data_file=FLAGS.data_file)
 
 # build vocabulary
 max_sentence_length = max([len(s.split(' ')) for s in x_text])

@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
+import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
 import re
+import os
 
 def clean_str(string):
     """
@@ -23,19 +25,19 @@ def clean_str(string):
     string = re.sub(r"\s{2,}", " ", string)
     return string.strip().lower()
 
-def load_text_and_label(file_pos_file, file_neg_file):
+def load_text_and_label(data_file):
     """
     Loads polarity data from files, splits the data into words and generates labels.
     Returns split sentences and labels.
     """
     # load data from file
-    file_pos = open(file=file_pos_file, mode='r', encoding='utf-8')
-    file_neg = open(file=file_neg_file, mode='r', encoding='utf-8')
-    pos_examples = list(file_pos.readlines())
-    neg_examples = list(file_neg.readlines())
-    pos_examples = [s.strip() for s in pos_examples]
-    neg_examples = [s.strip() for s in neg_examples]
+
     # splite by word
+    dfRaw = pd.read_csv(data_file)
+    dfRec = dfRaw[['Review Text', 'Recommended IND']].dropna()
+    pos_examples = dfRec[dfRec['Recommended IND'] == 1]['Review Text'].tolist()
+    neg_examples = dfRec[dfRec['Recommended IND'] == 0]['Review Text'].tolist()
+
     x_text = pos_examples + neg_examples
     x_text = np.array([clean_str(sentence) for sentence in x_text])
     # generate label (y)
