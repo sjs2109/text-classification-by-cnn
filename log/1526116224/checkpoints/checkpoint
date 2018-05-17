@@ -1,0 +1,6 @@
+model_checkpoint_path: "/Users/lovetube/PycharmProjects/text-classification-by-cnn/log/1526116224/checkpoints/model-9200"
+all_model_checkpoint_paths: "/Users/lovetube/PycharmProjects/text-classification-by-cnn/log/1526116224/checkpoints/model-8800"
+all_model_checkpoint_paths: "/Users/lovetube/PycharmProjects/text-classification-by-cnn/log/1526116224/checkpoints/model-8900"
+all_model_checkpoint_paths: "/Users/lovetube/PycharmProjects/text-classification-by-cnn/log/1526116224/checkpoints/model-9000"
+all_model_checkpoint_paths: "/Users/lovetube/PycharmProjects/text-classification-by-cnn/log/1526116224/checkpoints/model-9100"
+all_model_checkpoint_paths: "/Users/lovetube/PycharmProjects/text-classification-by-cnn/log/1526116224/checkpoints/model-9200"
